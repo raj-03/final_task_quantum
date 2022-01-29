@@ -1,0 +1,40 @@
+<html>
+
+<head>
+   
+</head>
+<body>
+    <div class="container">
+        <video autoplay id="myvideo" width="640" height="264" controls="" style="background:blue">
+            <source class="active"
+                src="https://cdn.videvo.net/videvo_files/video/premium/getty_105/large_watermarked/istock-1083459308_preview.mp4"
+                type="video/webm" />
+            <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/webm" />
+        </video>
+        <button id="button" type="primary">Skip</button>
+    </div>
+    <script>
+        var myvid = document.getElementById('myvideo');
+        var button = document.getElementById('button');
+
+        myvid.addEventListener('ended', function (e) {
+            var activesource = document.querySelector("#myvideo source.active");
+            var nextsource = document.querySelector("#myvideo source.active + source") || document.querySelector("#myvideo source:first-child");
+            activesource.className = "";
+            nextsource.className = "active";
+            myvid.src = nextsource.src;
+            myvid.play();
+        });
+
+        button.addEventListener("click", function (e) {
+            console.log(myvid.duration);
+            myvid.play();
+            myvid.pause();
+            myvid.currentTime = myvid.duration;
+            myvid.play();
+        });
+
+    </script>
+</body>
+
+</html>
